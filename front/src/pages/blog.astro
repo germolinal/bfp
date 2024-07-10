@@ -1,5 +1,5 @@
 ---
-import MainLayout from "../../layouts/MainLayout.astro";
+import MainLayout from "../layouts/MainLayout.astro";
 import { getCollection } from "astro:content";
 
 const allPosts = await getCollection("blog");
@@ -16,10 +16,8 @@ const blogPosts = dates.map((v: Date) => {
     });
     const d = v.getDate().toLocaleString("en-US", { minimumIntegerDigits: 2 });
     const id = `${y}-${m}-${d}`;
-    console.log(id, v);
     for (var i = 0; i < allPosts.length; i++) {
         const p = allPosts[i];
-        console.log(p.data.id);
         if (p.data.id === id) {
             return p;
         }
