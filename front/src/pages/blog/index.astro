@@ -1,0 +1,162 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("blog");
+let dates = allPosts
+    .map((v) => Date.parse(v.data.id))
+    .sort()
+    .reverse()
+    .map((v) => new Date(v));
+
+const blogPosts = dates.map((v: Date) => {
+    const y = v.getFullYear();
+    const m = (v.getMonth() + 1).toLocaleString("en-US", {
+        minimumIntegerDigits: 2,
+    });
+    const d = v.getDate().toLocaleString("en-US", { minimumIntegerDigits: 2 });
+    const id = `${y}-${m}-${d}`;
+    console.log(id, v);
+    for (var i = 0; i < allPosts.length; i++) {
+        const p = allPosts[i];
+        console.log(p.data.id);
+        if (p.data.id === id) {
+            return p;
+        }
+    }
+    throw new Error(`Could not find blog post with ID='${id}'`);
+});
+---
+
+<MainLayout title="Blog" description="Where we discuss Buildings For People">
+    <style>
+        div.cards {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        a.blog-card:visited {
+            color: inherit;
+            text-decoration: none;
+        }
+        a.blog-card {
+            width: 320px;
+            height: fit-content;
+            display: block;
+            margin: 0.5em 0.3em;
+            color: inherit;
+            text-decoration: none;
+            background-color: white;
+            box-shadow:
+                0 1px 3px rgba(0, 0, 0, 0.12),
+                0 1px 2px rgba(0, 0, 0, 0.24);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        a.blog-card:hover {
+            box-shadow:
+                0 14px 28px rgba(0, 0, 0, 0.25),
+                0 10px 10px rgba(0, 0, 0, 0.22);
+        }
+        div.img {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        a.blog-card h1 {
+            font-size: 1rem;
+            margin: 0.2rem 0;
+            font-weight: 400;
+        }
+        a.blog-card p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin: 0;
+            margin-top: 0.5rem;
+        }
+        a.blog-card small {
+            display: block;
+            font-size: 0.8rem;
+            margin: 0;
+            opacity: 0.7;
+        }
+        div.card-text {
+            display: flex;
+            flex-direction: column;
+            padding: 0.9em;
+            height: 110px;
+        }
+    </style>
+    <div class="cards">
+        {
+            blogPosts.map((post) => {
+                const v = new Date(Date.parse(post.data.id));
+
+                const y = v.getFullYear();
+                let m = undefined;
+                switch (v.getMonth()) {
+                    case 0:
+                        m = "January";
+                        break;
+                    case 1:
+                        m = "February";
+                        break;
+                    case 2:
+                        m = "March";
+                        break;
+                    case 3:
+                        m = "April";
+                        break;
+                    case 4:
+                        m = "May";
+                        break;
+                    case 5:
+                        m = "June";
+                        break;
+                    case 6:
+                        m = "July";
+                        break;
+                    case 7:
+                        m = "August";
+                        break;
+                    case 8:
+                        m = "September";
+                        break;
+                    case 9:
+                        m = "October";
+                        break;
+                    case 10:
+                        m = "November";
+                        break;
+                    case 11:
+                        m = "December";
+                        break;
+                    default:
+                        throw new Error(`impossible month ${v.getMonth()}`);
+                }
+
+                const d = v
+                    .getDate()
+                    .toLocaleString("en-US", { minimumIntegerDigits: 2 });
+                const date = `${d} ${m} ${y}`;
+
+                return (
+                    <a class="blog-card" href={`/blog/${post.data.id}.blog`}>
+                        {/* Image */}
+                        <div
+                            class="img"
+                            style={`background-image: url(/${post.data.image});`}
+                        />
+                        {/* Text */}
+                        <div class="card-text">
+                            <small>{date}</small>
+                            <h1>{post.data.title}</h1>
+                            <div style="flex-grow: 1" />
+                            <p>by {post.data.author}</p>
+                        </div>
+                    </a>
+                );
+            })
+        }
+    </div>
+</MainLayout>

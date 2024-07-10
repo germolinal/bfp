@@ -1,26 +1,32 @@
 ---
 import BlogPostLayout from "../../layouts/BlogPostLayout.astro";
-import { getCollection, getEntry } from "astro:content";
+import { getEntry } from "astro:content";
 
 export async function getStaticPaths() {
-    // const allBlogPosts = await getCollection("blog");
-    const allBlogPosts = await Astro.glob("../../content/blog/*.md");
-    return allBlogPosts.map((blog) => {
+    const allBlogPosts: any = await Astro.glob("../../content/blog/*.md");
+    return allBlogPosts.map((blog: any) => {
         return {
             params: {
-                id: blog.frontmatter.id.replace(".md", ""),
+                id: blog.frontmatter.id,
             },
             props: {
                 blog,
             },
+            frontmatter: blog.frontmatter,
         };
     });
 }
 
+// @ts-ignore
 const { Content } = Astro.props.blog;
+const { id } = Astro.params;
+const blogPost = await getEntry("blog", id);
+// @ts-ignore
+const frontmatter = blogPost.data
 ---
 
 <h1>
-    <!-- <BlogPostLayout frontmatter={}></BlogPostLayout> -->
+    <BlogPostLayout frontmatter={frontmatter}>
     <Content />
+    </BlogPostLayout>
 </h1>
