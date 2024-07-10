@@ -1,0 +1,13 @@
+<svg stroke="black" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" >    
+    
+    <circle cx="50" cy="50" r="46"  fill="transparent" stroke-width="3"/>
+    
+    <line x1="35" y1="15" x2="35" y2="67.3" stroke-width="3"/>
+    
+    <line x1="65" y1="85" x2="65" y2="32.7" stroke-width="3"/>
+    
+    <line x1="35" y1="45" x2="65" y2="35" stroke-width="6"/>
+    
+    <line x1="35" y1="65" x2="65" y2="55" stroke-width="6"/>
+    
+</svg>

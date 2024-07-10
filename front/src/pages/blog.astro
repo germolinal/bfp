@@ -31,6 +31,7 @@ const blogPosts = dates.map((v: Date) => {
         div.cards {
             display: flex;
             flex-wrap: wrap;
+            justify-content: center;
         }
         a.blog-card:visited {
             color: inherit;
@@ -139,7 +140,7 @@ const blogPosts = dates.map((v: Date) => {
                 const date = `${d} ${m} ${y}`;
 
                 return (
-                    <a class="blog-card" href={`/blog/${post.data.id}.blog`}>
+                    <a class="blog-card" href={`/${post.data.id}.blog`}>
                         {/* Image */}
                         <div
                             class="img"
