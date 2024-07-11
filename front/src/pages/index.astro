@@ -1,16 +1,168 @@
 ---
-
+import MainLayout from "../layouts/MainLayout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<MainLayout
+	title="Buildings for People"
+	description="Buildings should be for people!"
+>
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		#hero-img {
+			height: 100vh;
+			width: 100vw;
+			color: white;
+			padding: 0 0;
+			margin: 0;
+
+			background-color: black;
+			height: 100%;
+			width: 100%;
+			padding: 0 0;
+			margin: 0;
+
+			background-image: url("/cofee.jpg");
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+
+			padding-top: 20vh;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			text-align: center;
+		}
+
+		#hero-img * {
+			font-weight: 400;
+			opacity: 1;
+			z-index: 9999;
+		}
+
+		#hero-img > * {
+			color: black;
+		}
+
+		#hero-img::before {
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			position: absolute;
+			content: "";
+			background-color: rgba(255, 255, 255, 0.8);
+			z-index: 1;
+		}
+		#learn-more svg {
+			margin: 0 auto;
+		}
+		#learn-more {
+			margin-bottom: 20px;
+			display: flex;
+			flex-direction: column;
+			text-align: center;
+		}
+		#tedx {
+			padding: 1em;
+			display: block;
+			border: none;
+			margin: 1em auto;
+			width: 560px;
+			height: 315px;
+		}
+		#actions {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+		a,
+		a:visited {
+			text-decoration: none;
+			color: inherit;
+		}
+		#actions > a {
+			margin: 0.5em;
+			padding: 0.5em 1em;
+			border-radius: 1.4em;
+			color: #06c;
+			border: 1px solid #06c;
+		}
+		#actions > a:first-child {
+			color: white;
+			background-color: #0071e3;
+			border: none;
+		}
+		#actions > a > p {
+			margin: 0;
+			margin-top: 0.1em;
+		}
+		@media only screen and (max-width: 580px) {
+			#tedx {
+				width: 100vw;
+				height: 56vw;
+			}
+		}
+		@media (prefers-color-scheme: dark) {
+			#hero-img::before {
+				background-color: rgba(0, 0, 0, 0.8);
+			}
+			#hero-img > * {
+				color: white;
+			}
+			#actions > a {
+				color: #2997ff;
+				border: 1px solid #2997ff;
+			}
+		}
+	</style>
+
+	<div id="hero-img">
+		<div>
+			<h1>Buildings are for people</h1>
+			<h2>Let's take them seriously</h2>
+		</div>
+		<div id="actions">
+			<a href="/atlas.html">
+				<small> Check our </small>
+				<p>Atlas of Comfort</p>
+			</a>
+
+			<a>
+				<small> Check our </small>
+				<p><code>SIMPLE</code> simulation tool</p>
+			</a>
+		</div>
+		<div id="learn-more">
+			<small>Learn more</small>
+			<svg
+				stroke="currentColor"
+				fill="currentColor"
+				stroke-width="0"
+				viewBox="0 0 512 512"
+				height="1em"
+				width="1em"
+				xmlns="http://www.w3.org/2000/svg"
+				><path
+					fill="none"
+					stroke-linecap="square"
+					stroke-miterlimit="10"
+					stroke-width="48"
+					d="m112 184 144 144 144-144"></path></svg
+			>
+		</div>
+	</div>
+
+	<div>
+		<!-- <h1>Check out this</h1> -->
+
+		<iframe
+			id="tedx"
+			src="https://www.youtube.com/embed/pxGS2Knswfg"
+			title="YouTube video player"
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+			allowfullscreen></iframe>
+	</div>
+</MainLayout>

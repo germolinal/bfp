@@ -78,10 +78,10 @@ import MainLayout from "../layouts/MainLayout.astro";
         /* Concentric circles */
         #diagram > svg circle.layer_circle {
             stroke: #8a8b8c;
+            fill: #dce6f1;
             stroke-width: 0.3;
             stroke-dasharray: 3, 2;
             cursor: pointer;
-            fill: #dce6f1;
         }
 
         #diagram > svg circle.layer_circle:hover,
@@ -219,13 +219,13 @@ import MainLayout from "../layouts/MainLayout.astro";
             font-size: 0.85em;
         }
         ul.tabs_container > li.active {
-            border-bottom: 2px solid #34618e;
+            border-bottom: 2px solid #06c;
             background-color: rgba(52, 97, 142, 0.3);
-            color: #34618e;
+            color: #06c;
         }
 
         ul.tabs_container > li:hover {
-            color: #34618e;
+            color: #06c;
             background-color: rgba(52, 97, 142, 0.1);
         }
 
@@ -254,7 +254,7 @@ import MainLayout from "../layouts/MainLayout.astro";
 
         div.tab_page_container > div.list > a:hover,
         a.list_element:hover {
-            color: #34618e;
+            color: #06c;
             background-color: rgba(52, 97, 142, 0.1);
         }
 
@@ -268,7 +268,7 @@ import MainLayout from "../layouts/MainLayout.astro";
 
         div#content_text_aid > p > a {
             cursor: pointer;
-            color: #34618e;
+            color: #06c;
             font-weight: bold;
             text-decoration: none;
         }
@@ -323,8 +323,6 @@ import MainLayout from "../layouts/MainLayout.astro";
             margin-right: 0.3em;
         }
 
-        
-
         @media only screen and (max-width: 770px) {
             #text_aid {
                 position: fixed;
@@ -357,7 +355,7 @@ import MainLayout from "../layouts/MainLayout.astro";
                 left: 0;
                 text-align: center;
                 cursor: pointer;
-                background-color: #34618e;
+                background-color: #06c;                
             }
 
             #bottom_navbar.hidden {
@@ -381,6 +379,70 @@ import MainLayout from "../layouts/MainLayout.astro";
                 margin-right: 0;
             }
         }
+        @media (prefers-color-scheme: dark) {
+            ul.tabs_container {
+                border-top: 1px solid rgb(50, 50, 50);
+                border-bottom: 1px solid rgb(50, 50, 50);
+            }
+            #text_aid {
+                color: rgb(200, 200, 200);
+            }
+            #bottom_navbar > p {
+                color: black;
+            }
+            #diagram > svg circle.layer_circle {
+                fill: rgb(30, 30, 30);
+            }
+            #diagram > svg circle.layer_circle:hover,
+            #diagram > svg circle.active {
+                stroke: rgb(180, 180, 180);
+                fill: rgb(80, 80, 80);
+            }
+
+            div.respondent_quotes_container,
+            div#content_text_aid blockquote {
+                background: rgb(40, 40, 40);
+                margin-bottom: 0.5em;
+            }
+
+            ul.tabs_container > li {
+                color: inherit;
+            }
+            ul.tabs_container > li.active {
+                border-bottom: 2px solid #2997ff;
+                color: #2997ff;
+            }
+
+            ul.tabs_container > li:hover {
+                color: #2997ff;
+            }
+
+            div.tab_page_container > div.list {
+                background: rgb(40, 40, 40);
+            }
+
+            div.tab_page_container > div.list > p,
+            div.tab_page_container > div.list > a,
+            a.list_element {
+                background-color: transparent;
+                border: 1px solid rgb(80, 80, 80);
+            }
+
+            div.tab_page_container > div.list > a:hover,
+            a.list_element:hover {
+                color: #2997ff;
+            }
+
+            div#content_text_aid > p > a {
+                color: #2997ff;
+            }
+            #bottom_navbar {                
+                background-color: #2997ff;                            
+            }
+            #bottom_navbar > p {
+                color:white;
+            }
+        }
     </style>
 
     <script>
@@ -390,7 +452,6 @@ import MainLayout from "../layouts/MainLayout.astro";
 
         let diagram: Diagram | undefined = undefined;
 
-        
         window.onload = function () {
             router = new Router();
 
@@ -406,7 +467,7 @@ import MainLayout from "../layouts/MainLayout.astro";
 
                 let response = await r.json();
 
-                // build the diagram                
+                // build the diagram
                 diagram = new Diagram(router!, "diagram", response.layers);
                 diagram.draw();
 
@@ -435,6 +496,4 @@ import MainLayout from "../layouts/MainLayout.astro";
         <p id="back_to_layers_button">BACK TO LAYERS</p>
         <p id="back_button">BACK</p>
     </div>
-
-    
 </MainLayout>
