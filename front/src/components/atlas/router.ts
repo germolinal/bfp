@@ -25,7 +25,8 @@ export default class Router {
         var fragment = "";
 
         if (this.mode === 'history') {
-            fragment = this.clearSlashes(decodeURI(window.location.pathname + window.location.search));            
+            fragment = this.clearSlashes(decodeURI(window.location.pathname + window.location.search));
+            
             fragment = fragment.replace("atlas.html", "").replace("atlas", "");
         } else {
             const match = window.location.href.match(/#(.*)$/);
@@ -53,10 +54,6 @@ export default class Router {
         if (state1.code != state2.code || state1.domain != state2.domain) {
             return false
         }
-
-        
-
-
 
         return true
     }

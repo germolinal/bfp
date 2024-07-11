@@ -323,36 +323,7 @@ import MainLayout from "../layouts/MainLayout.astro";
             margin-right: 0.3em;
         }
 
-        #tutorial_navbar {
-            position: fixed;
-            bottom: 0;
-            left: 85vh;
-            right: 0;
-            padding: 0 1em;
-            text-align: center;
-            background-color: #34618e;
-        }
-
-        #tutorial_navbar p {
-            display: inline-block;
-            margin: auto;
-            padding: 0.5em 3em;
-            cursor: pointer;
-            color: white;
-        }
-
-        #tutorial_navbar p.disabled {
-            color: rgba(255, 255, 255, 0.3);
-            cursor: default;
-        }
-
-        #tutorial_navbar p.disabled:hover {
-            background-color: #34618e;
-        }
-
-        #tutorial_navbar p:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
+        
 
         @media only screen and (max-width: 770px) {
             #text_aid {
@@ -377,8 +348,7 @@ import MainLayout from "../layouts/MainLayout.astro";
                 display: inherit;
             }
 
-            #bottom_navbar,
-            #tutorial_navbar {
+            #bottom_navbar {
                 display: block;
                 position: fixed;
                 bottom: 0;
@@ -390,8 +360,7 @@ import MainLayout from "../layouts/MainLayout.astro";
                 background-color: #34618e;
             }
 
-            #bottom_navbar.hidden,
-            #tutorial_navbar.hidden {
+            #bottom_navbar.hidden {
                 display: none;
             }
 
@@ -421,9 +390,7 @@ import MainLayout from "../layouts/MainLayout.astro";
 
         let diagram: Diagram | undefined = undefined;
 
-        // This stores the different functions
-        // that represent the behaviour of tutorials
-        var tutorialBehavior = [];
+        
         window.onload = function () {
             router = new Router();
 
@@ -469,11 +436,5 @@ import MainLayout from "../layouts/MainLayout.astro";
         <p id="back_button">BACK</p>
     </div>
 
-    <div id="tutorial_navbar" class="hidden">
-        <p style="position:absolute;left:0px" id="back_tutorial_stage">
-            Previous
-        </p>
-        <p id="home_tutorials">Quit</p>
-        <p style="position:absolute;right:0px" id="next_tutorial_stage">Next</p>
-    </div>
+    
 </MainLayout>
