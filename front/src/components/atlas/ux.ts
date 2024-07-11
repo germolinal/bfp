@@ -159,9 +159,13 @@ export function selectLayer(router: Router, layerID: string, domainID: string, d
             "coolness",
             "air quality",
         ];
+        let firstTab : HTMLElement | undefined = undefined;
         allDomains.forEach((domain: string) => {
             // add button
             var tab = document.createElement('li');
+            if(!firstTab){
+                firstTab = tab
+            }
             tab.innerText = (domain[0].toUpperCase() + domain.slice(1));
             tabsContainer.appendChild(tab);
 
@@ -177,17 +181,17 @@ export function selectLayer(router: Router, layerID: string, domainID: string, d
                 router.navigate(path, diagram)
             }
 
-            if (idize(domain) === domainID) {
+            if (idize(domain) === domainID) {                
                 domainContainers[domain].classList.add("active")
                 tab.classList.add('active')
                 activatedAny = true;
             }
 
-            if (!activatedAny) {
-                domainContainers[allDomains[0]].classList.add("active")
-                tab.classList.add('active')
-            }
         })
+        if (!activatedAny) {
+            domainContainers[allDomains[0]].classList.add("active")
+            firstTab!.classList.add('active')
+        }
 
 
         layerData.data.forEach((code: any) => {
@@ -323,7 +327,8 @@ export function selectCode(router: Router, codeID: string, domainID: string, dia
         if (!r.ok) {
             throw new Error("Oh no!")
         }
-        var response = await r.json()
+        
+        var response = await r.json()        
         var firstContainer;
         var firstTitle;
         // Add container for quotes
@@ -409,10 +414,10 @@ export function selectCode(router: Router, codeID: string, domainID: string, dia
 
             })
         })
-        // if (!activatedAny) {
-        //     firstContainer!.classList.add("active")
-        //     firstTitle!.classList.add('active')
-        // }
+        if (!activatedAny) {
+            firstContainer!.classList.add("active")
+            firstTitle!.classList.add('active')
+        }
 
     })
 

@@ -25,9 +25,8 @@ export default class Router {
         var fragment = "";
 
         if (this.mode === 'history') {
-            fragment = this.clearSlashes(decodeURI(window.location.pathname + window.location.search));
-            //fragment = fragment.replace(/\?(.*)$/,"");
-            fragment = fragment.replace("atlas.html", "");
+            fragment = this.clearSlashes(decodeURI(window.location.pathname + window.location.search));            
+            fragment = fragment.replace("atlas.html", "").replace("atlas", "");
         } else {
             const match = window.location.href.match(/#(.*)$/);
             fragment = match ? match[1] : "";
@@ -55,11 +54,7 @@ export default class Router {
             return false
         }
 
-        // it was a tutorial query
-
-        if (state1.tutorial != state2.tutorial || state1.stage != state2.stage) {
-            return false;
-        }
+        
 
 
 
@@ -113,9 +108,6 @@ export default class Router {
                 // query for code                
                 selectCode(this, query.code, query.domain, diagram);
                 this.currentCode = query.code;
-            } else if (query.tutorial !== undefined) {
-                // query for code
-                getTutorial(query.tutorial, query.stage);
             } else {
                 alert("Router not working with -> '" + path + "'")
             }
