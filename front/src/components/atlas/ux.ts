@@ -38,8 +38,7 @@ export function setEventInLinks(router: Router, container: HTMLElement, diagram:
 export function positionTooltip(event: any, tooltip: any) {
     var eventDoc, doc, body;
 
-    event = event || window.event; // IE-ism
-
+    
     // If pageX/Y aren't available and clientX/Y are,
     // calculate pageX/Y - logic taken from jQuery.
     // (This is to support old IE)

@@ -80,7 +80,7 @@ export default class Router {
         } else {
             // Transform into object
             // Remove the '?'
-            path = path.substr(1);
+            path = path.substring(1);
 
             var query: any = {};
 

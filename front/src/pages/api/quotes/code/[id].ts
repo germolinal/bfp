@@ -3,7 +3,7 @@ import type { Quote } from '../../../../components/atlas/types';
 
 
 
-export const GET: APIRoute = ({ params, request }) => {
+export const GET: APIRoute = ({ params }) => {
 
     const id = params.id!.replaceAll("_", " ").toLowerCase()
 

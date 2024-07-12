@@ -1,7 +1,7 @@
 import Router from "./router"
 import Layer from "./layer"
 import { idize, capitalize } from "./ux"
-import type { LayerData, Schema } from "./types"
+import type { LayerData } from "./types"
 
 export default class Diagram {
 

@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 
 
-export const GET: APIRoute = ({ params, request }) => {
+export const GET: APIRoute = ({ params }) => {
 
     const id = params.id!
     return new Response(
