@@ -1,0 +1,62 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import colors from "../colors";
+const primaryOutlineLight = colors["primary_outline_light"];
+const primaryOutlineDark = colors["primary_outline_dark"];
+---
+
+<MainLayout
+    title="Terms of use"
+    description="Using resources in Buildings for People"
+>
+    <style
+        define:vars={{
+            primaryOutlineLight,
+            primaryOutlineDark,
+        }}
+    >
+        main {
+            padding: 70px 1em;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        a,
+        a:visited {
+            text-decoration: none;
+            color: var(--primaryOutlineLight);
+            font-size: 0.88em;
+            font-weight: bold;
+            border-radius: 1em;
+        }
+        @media (prefers-color-scheme: dark) {
+            a,
+            a:visited {
+                color: var(--primaryOutlineDark);
+            }
+        }
+    </style>
+    <main>
+        <h1>Terms of use</h1>
+
+        <p>
+            This project, the <a href="/resources.html">tools</a> and the <a
+                href="./atlas.html">Atlas of comfort</a
+            > are constantly under development and improving. The main purpose of this website is
+            only to allow sharing our ideas and visions.
+        </p>
+
+        <p>
+            If you want to reference our work, please do so through the related
+            academic publications. <a href="./contact.html">Contact us</a> to see
+            what we have done.
+        </p>
+
+        <p>
+            If you have any question about the use of our content, please
+            <a href="./contact.html">contact us</a>. We are happy to answer!
+        </p>
+
+        <p>Other than that, plase enjoy!</p>
+    </main>
+</MainLayout>

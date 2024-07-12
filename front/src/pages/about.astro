@@ -1,11 +1,72 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-
-
+import colors from "../colors";
+const primaryOutlineLight = colors["primary_outline_light"];
+const primaryOutlineDark = colors["primary_outline_dark"];
 ---
-<MainLayout 
+
+<MainLayout
     title="About Buildings for People"
     description="About buildings for People"
 >
+    <style
+        define:vars={{
+            primaryOutlineLight,
+            primaryOutlineDark,
+        }}
+    >
+        main {
+            padding: 70px 1em;
+            max-width: 720px;
+            margin: 0 auto;
+        }
 
+        a,
+        a:visited {
+            text-decoration: none;
+            color: var(--primaryOutlineLight);
+            font-size: 0.88em;
+            font-weight: bold;
+            border-radius: 1em;
+        }
+        @media (prefers-color-scheme: dark) {
+            a,
+            a:visited {
+                color: var(--primaryOutlineDark);
+            }
+        }
+    </style>
+    <main>
+        <h1>What is Buildings for People?</h1>
+
+        <p>
+            It is an effort to transfer <a
+                href="https://www.linkedin.com/in/germolinal/"
+                >Germ&aacute;n Molina's</a
+            >
+            PhD research into the non-academic world. This research was supervised
+            by
+            <a href="https://people.wgtn.ac.nz/micael-lee.johnstone"
+                >Micael-Lee Johnstone</a
+            >,
+            <a href="https://www.linkedin.com/in/michaeldonn/">Michael Donn</a>
+            and
+            <a href="https://www.researchgate.net/profile/Casimir_MacGregor"
+                >Casimir MacGregor</a
+            >. We think the outcome of this research can impact on Architecture,
+            Real Estate and Public Policy, among other areas.
+        </p>
+
+        <p>
+            Carried out at the <a href="https://www.wgtn.ac.nz/wfadi"
+                >School of Architecture at Victoria University of Wellington</a
+            >, this research intends to study the more human factors of Comfort
+            in homes from a multidisciplinary approach. This led to, among other
+            things, a new definition of "comfort" that emphasizes much more
+            <a href="https://buildingsforpeople.org/2020-08-14.blog"
+                >the role of the people in their homes</a
+            >. This allows for a better understanding of what people want and
+            what impoves their wellbeing.
+        </p>
+    </main>
 </MainLayout>

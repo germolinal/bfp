@@ -1,0 +1,44 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import colors from "../colors";
+const primaryOutlineLight = colors["primary_outline_light"];
+const primaryOutlineDark = colors["primary_outline_dark"];
+---
+
+<MainLayout
+    title="Contact"
+    description="Contact Buildings for People"
+>
+    <style define:vars={{ primaryOutlineLight, primaryOutlineDark }}>
+        main {
+            padding: 70px 1em;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        a,
+        a:visited {
+            text-decoration: none;
+            color: var(--primaryOutlineLight);
+            font-size: 0.88em;
+            font-weight: bold;
+            border-radius: 1em;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            a,
+            a:visited {
+                color: var(--primaryOutlineDark);
+            }
+        }
+    </style>
+    <main>
+        <h1>Do you want to know more?</h1>
+
+        <p>
+            Please contact Germ&aacute;n Molina through <a
+                href="https://www.linkedin.com/in/germolinal/">LinkedIn</a
+            >
+        </p>
+    </main>
+</MainLayout>
