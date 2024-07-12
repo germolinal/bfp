@@ -1,12 +1,25 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
+import colors from "../colors";
+
+const primaryOutlineLight = colors["primary_outline_light"];
+const primarySolidLight = colors["primary_solid_light"];
+const onPrimarySolidLight = colors["on_primary_solid_light"];
+const primaryOutlineDark = colors["primary_outline_dark"]
 ---
 
 <MainLayout
 	title="Buildings for People"
 	description="Buildings should be for people!"
 >
-	<style>
+	<style
+		define:vars={{
+			primaryOutlineLight,
+			primarySolidLight,
+			onPrimarySolidLight,
+			primaryOutlineDark,
+		}}
+	>
 		* {
 			box-sizing: border-box;
 		}
@@ -87,12 +100,12 @@ import MainLayout from "../layouts/MainLayout.astro";
 			margin: 0.5em;
 			padding: 0.5em 1em;
 			border-radius: 1.4em;
-			color: #06c;
-			border: 1px solid #06c;
+			color: var(--primaryOutlineLight);
+			border: 1px solid var(--primaryOutlineLight);
 		}
 		#actions > a:first-child {
-			color: white;
-			background-color: #0071e3;
+			color: var(--onPrimarySolidLight);
+			background-color: var(--primarySolidLight);
 			border: none;
 		}
 		#actions > a > p {
@@ -113,8 +126,8 @@ import MainLayout from "../layouts/MainLayout.astro";
 				color: white;
 			}
 			#actions > a {
-				color: #2997ff;
-				border: 1px solid #2997ff;
+				color: var(--primaryOutlineDark);
+				border: 1px solid var(--primaryOutlineDark);
 			}
 		}
 	</style>
@@ -130,7 +143,7 @@ import MainLayout from "../layouts/MainLayout.astro";
 				<p>Atlas of Comfort</p>
 			</a>
 
-			<a>
+			<a href="/simple.html">
 				<small> Check our </small>
 				<p><code>SIMPLE</code> simulation tool</p>
 			</a>

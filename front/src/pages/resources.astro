@@ -1,0 +1,176 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import colors from "../colors";
+
+const primaryOutlineLight = colors["primary_outline_light"];
+const primaryOutlineDark = colors["primary_outline_dark"]
+
+---
+
+<MainLayout
+    title="Buildings for People Resources"
+    description="Tools for designing buildings for people"
+>
+    <style define:vars={{
+        primaryOutlineLight,
+        primaryOutlineDark,
+    }}>
+        main {
+            padding-top: 50px;
+            padding-bottom: 4em;
+        }
+        main > div {
+            text-align: center;
+            margin-bottom: 4em;
+        }
+
+        a,
+        a:visited {
+            text-decoration: none;
+            color: var(--primaryOutlineLight);
+            font-size: 0.88em;
+            font-weight: 500;
+            border-radius: 1em;
+            border: 1px solid ;
+            display: inline-block;
+            padding: 0.3em 1.2em;
+            margin-top: 0.8em;
+        }
+        main > div > *:first-child {
+            max-width: 320px;
+            text-align: center;
+            padding: 0 1em;
+            margin: 0 auto;
+            margin-bottom: 1em;
+        }
+        ul,
+        li {
+            text-align: left;
+        }
+        main > div > * {
+            margin: 0;
+        }
+        main > div > *:last-child,
+        main > div > *:last-child img {
+            width: 80vw;
+            max-width: 320px;
+        }
+        #tedx {
+            border: none;
+            width: 90vw;
+            height: 51vw;
+        }
+        h1 {
+            font-size: 1.4em;
+            margin: 0;
+        }
+        p {
+            margin: 0;
+            margin-top: 0.5em;
+        }
+        @media only screen and (min-width: 670px) {
+            h1 {
+                font-size: 1.2em;
+            }
+            #tedx {
+                width: 504px;
+                height: 284px;
+            }
+            main > div {
+                margin-top: 6em;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            main > div > * {
+                margin: 0 0.8em;
+            }
+            main > div > *:first-child {
+                margin: 0;
+                text-align: left;                
+            }
+            main > div > *:last-child,
+            main > div > *:last-child img {
+                width: 30vw;
+            }
+            main > div:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+        }
+        @media (prefers-color-scheme: dark) {
+            a,
+            a:visited {
+                color: var(--primaryOutlineDark);
+            }
+        }
+    </style>
+    <main>
+        <div>
+            <div>
+                <h1>The Atlas of Comfort</h1>
+                <p>
+                    A research-based exploration of what people mean by and
+                    expect from Comfortable homes.
+                </p>
+                <p>
+                    It extends traditional models of Indoor Environmental
+                    Quality by emphasizing the psychological and behavioural
+                    factors that affect people's comfort and behaviour.
+                </p>
+
+                <a href="/atlas.html">Check it out</a>
+            </div>
+            <picture>
+                <source
+                    srcset="/atlas_light.png"
+                    media="(prefers-color-scheme: light)"
+                />
+                <source
+                    srcset="/atlas_dark.png"
+                    media="(prefers-color-scheme: dark)"
+                />
+                <img src="/atlas_light.png" />
+            </picture>
+        </div>
+
+        <div>
+            <div>
+                <h1><code>SIMPLE</code></h1>
+                <p>
+                    A new-generation building simulation engine, designed for
+                    solving today's challenges. This means being able to
+                    simulate buildings for people, and being deployable into
+                    different distribution channels (e.g., web, cloud, app, PC,
+                    and more).
+                </p>
+                <a href="/simple.html">Check it out</a>
+            </div>
+            <picture>
+                <source
+                    srcset="/simple_resources_light.png"
+                    media="(prefers-color-scheme: light)"
+                />
+                <source
+                    srcset="/simple_resources_dark.png"
+                    media="(prefers-color-scheme: dark)"
+                />
+                <img src="/simple_resources_light.png" />
+            </picture>
+        </div>
+
+        <div>
+            <div>
+                <h1>TEDx Mount Victoria</h1>
+                <p>
+                    A 15-minute introduction to my views on Comfortable homes.
+                </p>
+            </div>
+            <iframe
+                id="tedx"
+                src="https://www.youtube.com/embed/pxGS2Knswfg"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        </div>
+    </main>
+</MainLayout>
