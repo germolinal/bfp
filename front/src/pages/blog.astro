@@ -86,6 +86,11 @@ const blogPosts = dates.map((v: Date) => {
             padding: 0.9em;
             height: 110px;
         }
+        @media (prefers-color-scheme: dark) {
+            div.card-text {
+                background-color: rgb(30,30,30);
+            }
+        }
     </style>
     <div class="cards">
         {
