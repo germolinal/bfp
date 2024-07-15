@@ -332,7 +332,29 @@ const primaryOutlineDark = colors["primary_outline_dark"];
             margin-right: 0.3em;
         }
 
+        #small-screen-dialog {
+            display: none;
+            height: 100vh;
+            width: 100vw;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: inherit;
+            z-index: 999999;
+            border: none;
+            backdrop-filter: blur(4px);
+        }
+        #small-screen-dialog > div {
+            height: fit-content;
+            display: block;
+            text-align: center;
+            margin: 50vh auto;
+            background-color: white;
+            padding: 3em;
+            transform: translateY(-50%);
+        }
         @media only screen and (max-width: 770px) {
+            #small-screen-dialog {
+                display: block;
+            }
             #text_aid {
                 position: fixed;
                 padding-top: 2.7em;
@@ -451,9 +473,26 @@ const primaryOutlineDark = colors["primary_outline_dark"];
             #bottom_navbar > p {
                 color: white;
             }
+            #small-screen-dialog {
+                background-color: black;
+            }
+
+            #small-screen-dialog > div {
+                background-color: black;
+            }
         }
     </style>
 
+    <script>
+        document.getElementById("close-small-screen-dialog")!.onclick = () => {
+            let smallScreenDialog = document.getElementById(
+                "small-screen-dialog",
+            )! as HTMLDialogElement;
+            smallScreenDialog.close();
+            smallScreenDialog.style.display="none"
+            
+        };
+    </script>
     <script>
         import Router from "../components/atlas/router";
         import Diagram from "../components/atlas/diagram";
@@ -487,6 +526,19 @@ const primaryOutlineDark = colors["primary_outline_dark"];
             window.onpopstate = resolveURL;
         };
     </script>
+
+    <dialog id="small-screen-dialog" open>
+        <div>
+            <p>Small screens do not allow seeing the main diagram properly.</p>
+            <p>
+                <b>
+                    We strongly recommend viewing the Atlas of Comfort in
+                    larger screens.
+                </b>
+            </p>
+            <button id="close-small-screen-dialog">OK</button>
+        </div>
+    </dialog>
 
     <div id="maindiv">
         <div id="diagram"></div>
