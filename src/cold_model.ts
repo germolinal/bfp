@@ -1,5 +1,5 @@
-import type { DrawableModel } from "./components/render/simple_types/simple_model";
-const model: DrawableModel = {
+import type SimpleModel from "./components/render/simple_types/simple_model";
+const model: SimpleModel = {
     buildings: [
         {
             name: "Art Deco Building",
@@ -1097,8 +1097,7 @@ const model: DrawableModel = {
         n_solar_irradiance_points: 10,
         solar_ambient_divitions: 300,
         solar_sky_discretization: 1,
-        optical_data_path:
-            "/var/folders/l4/pc350yzj6639drp3_z6n3rwm0000gn/T/77debaac-9816-4260-aef0-13720c429abe.json",
+        
     },
     spaces: [
         {

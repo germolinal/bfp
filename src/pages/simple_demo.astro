@@ -8,12 +8,25 @@ import MainLayout from "../layouts/MainLayout.astro";
 >
     <style>
         body > main {
-            padding-top: 50px;
-            color: red;
+            display: flex;
+            overflow: hidden;
+            width: 100vw;
+        }
+        #toolbar {
+            padding: 0.5em;
+            padding-top: 150px;
+            width: 300px;
+            min-width: 300px;
+            height: 100%;
+            margin: 0;
+            height: 100vh;
+        }
+        #renderer {
+            height: 100vh;
+            flex-grow: 1;
         }
     </style>
     <main>
-        <h1>Hey!</h1>
         <div id="renderer">
             <simple-renderer
                 model={JSON.stringify({
@@ -33,6 +46,20 @@ import MainLayout from "../layouts/MainLayout.astro";
                 accentColor={"#00658b"}
             >
             </simple-renderer>
+        </div>
+        <div id="toolbar">
+            <input
+                id="set-temp"
+                type="range"
+                min="1"
+                max="50"
+                value="22"
+                class="slider"
+            />
+            <h2>Temperatures</h2>
+            <ul id="temps">
+                <li><span>Exterior</span>:<span id="ext-temp"></span></li>
+            </ul>
         </div>
     </main>
     <script>
@@ -75,11 +102,62 @@ import MainLayout from "../layouts/MainLayout.astro";
             return ret;
         }
 
-        const renderer = document.getElementById("renderer")!.children[0] as Simple3DRenderer;
-        renderer.model = JSON.stringify(ColdModel)
-        
+        const renderer = document.getElementById("renderer")!
+            .children[0] as Simple3DRenderer;
+        renderer.model = JSON.stringify(ColdModel);
+
+        const setTemp = document.getElementById(
+            "set-temp",
+        )! as HTMLInputElement;
+        setTemp.oninput = (e: any) => {
+            let t = Math.round(e.target.value);
+            document.getElementById("ext-temp")!.innerText = t;
+        };
 
         const modelHandler = GetModelHandler(JSON.stringify(ColdModel));
-        
+        let state = modelHandler.get_state();
+        let stateLen = modelHandler.state_len();
+        const getStateElement = (i: number) => {
+            if (i < 0 || i >= stateLen) {
+                throw new Error(
+                    `Index out of bounds!... got ${i} when state's length is ${stateLen}`,
+                );
+            }
+            const stateData = new Float64Array(memory.buffer, state, stateLen);
+            return Math.round(stateData[i]*10)/10;
+        };
+
+        let temps: any[] = [];
+        let tempList = document.getElementById("temps")!;
+        ColdModel.spaces.forEach((s, i) => {
+            let index = modelHandler.get_space_temperature_index(i);
+            let name = s.name;
+            let temperature = getStateElement(index);
+
+            let li = document.createElement("li");
+            li.innerHTML = `<span>${name}</span>:`;
+            let span = document.createElement("span");
+            li.appendChild(span);
+            tempList.appendChild(li);
+
+            temps.push({
+                index,
+                span,
+            });
+        });
+
+        const renderLoop = () => {
+            modelHandler.march(setTemp.value);
+            temps.forEach((v) => {
+                let { index, span } = v;
+
+                let t = getStateElement(index);
+                span.innerText = t
+            });
+
+
+            requestAnimationFrame(renderLoop);
+        };
+        renderLoop();
     </script>
 </MainLayout>

@@ -19,7 +19,6 @@ import DrawTable from "./draw/table";
 import DrawTelevision from "./draw/television";
 import DrawToilet from "./draw/toilet";
 
-import type SimpleModel from "./simple_types/simple_model";
 import type { DrawableModel } from "./simple_types/simple_model";
 
 import * as THREE from "three";
@@ -64,7 +63,7 @@ export default class Simple3DRenderer extends HTMLElement {
     accentColor = "#00658b"
 
 
-    set model(v: string){        
+    set model(v: string) {
         this.attributeChangedCallback("model", JSON.stringify(this._model), v)
     }
 
@@ -80,7 +79,7 @@ export default class Simple3DRenderer extends HTMLElement {
                         this._scene.remove(this._scene.children[0]);
                     }
                 }
-                this._model = JSON.parse(newValue)                
+                this._model = JSON.parse(newValue)
                 break;
             case "groundColor":
                 this.groundColor = newValue
@@ -119,8 +118,25 @@ export default class Simple3DRenderer extends HTMLElement {
         if (!this.shadowRoot) {
             this.attachShadow({ mode: "open" });
         }
-        this.shadowRoot!.innerHTML = `<div style="background-color:#000;" id="canvas-container">
-            </div>`;
+        this.shadowRoot!.innerHTML = `
+            <style>          
+                :host {
+                    display: block;
+                    height: 100%;
+                    width: 100%;
+                }      
+                #canvas-container {
+                    background-color:#000;                    
+                    height: 100%;
+                    width: 100%;
+                    min-width: 200px;
+                }
+                #canvas-container > * {
+                    min-width: 200px;
+                }
+            </style>   
+            <div  id="canvas-container"></div>
+        `;
         /* SCENE */
         this._scene = new Scene();
 
@@ -281,12 +297,12 @@ export default class Simple3DRenderer extends HTMLElement {
 
 
     private draw() {
-        if (!this._scene ) {
+        if (!this._scene) {
             return
         }
         DrawSky(this._scene);
         DrawGround(this._scene, this.groundColor);
-        if(!this._model){
+        if (!this._model) {
             return
         }
 
@@ -318,9 +334,13 @@ export default class Simple3DRenderer extends HTMLElement {
         this._renderer!.render(this._scene!, this._camera!);
     };
     private onWindowResize = () => {
-        this._camera!.aspect = window.innerWidth / window.innerHeight;
+        const e = this.shadowRoot!.getElementById("canvas-container")!
+        let width = window.innerWidth - 300//e.offsetWidth
+        let height = window.innerHeight//e.offsetHeight        
+        this._camera!.aspect = width / height;
         this._camera!.updateProjectionMatrix();
-        this._renderer!.setSize(window.innerWidth, window.innerHeight);
+        // this._renderer!.setSize(window.innerWidth, window.innerHeight);
+        this._renderer!.setSize(width, height);
 
         this.renderModel();
     };
