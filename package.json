@@ -9,12 +9,18 @@
     "preview": "astro preview",
     "astro": "astro"
   },
+  "devDependencies": {
+    "@types/three": "^0.166.0",
+    "vite-plugin-top-level-await": "^1.4.1",
+    "vite-plugin-wasm": "^3.3.0"
+  },
   "dependencies": {
     "@astrojs/check": "^0.8.0",
     "@fontsource-variable/montserrat": "^5.0.19",
     "@playform/compress": "^0.0.13",
     "astro": "^4.11.5",
-    "typescript": "^5.5.3",
-    "simple_":"../simple-wasm/pkg"
+    "simple-wasm": "../simple-wasm/pkg",
+    "three": "0.166",
+    "typescript": "^5.5.3"
   }
 }

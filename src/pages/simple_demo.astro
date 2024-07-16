@@ -1,0 +1,85 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout
+    title="SIMPLE demo"
+    description="A demonstration of client-based simulation"
+>
+    <style>
+        body > main {
+            padding-top: 50px;
+            color: red;
+        }
+    </style>
+    <main>
+        <h1>Hey!</h1>
+        <div id="renderer">
+            <simple-renderer
+                model={JSON.stringify({
+                    surfaces: [],
+                    fenestrations: [],
+                    luminaires: [],
+                    hvacs: [],
+                    spaces: [],
+                    objects: [],
+                })}
+                groundColor={"#bab6ab"}
+                indoorWallColor={"#ecf7ff"}
+                outdoorWallColor={"#cecece"}
+                ceilingColor={"#d2d2d2"}
+                floorColor={"#EFDECD"}
+                doorColor={"#ccb999"}
+                accentColor={"#00658b"}
+            >
+            </simple-renderer>
+        </div>
+    </main>
+    <script>
+        import Simple3DRenderer from "../components/render/renderer";
+        if (!customElements.get("simple-renderer")) {
+            customElements.define("simple-renderer", Simple3DRenderer);
+        }
+    </script>
+    <script>
+        import ColdModel from "../cold_model";
+
+        import Simple3DRenderer from "../components/render/renderer";
+
+        import {
+            memory,
+            __wbindgen_malloc,
+            __wbindgen_free,
+            // @ts-ignore
+        } from "simple-wasm/simple_wasm_bg.wasm";
+        // @ts-ignore
+        import { ModelHandler } from "simple-wasm";
+
+        function mallocString(str: string): { ptr: any; len: number } {
+            const encoder = new TextEncoder();
+            const strBuffer = encoder.encode(str);
+            const len = strBuffer.length;
+            const ptr = __wbindgen_malloc(len, 1);
+
+            const m = new Uint8Array(memory.buffer, ptr, len);
+            m.set(strBuffer);
+
+            return { ptr, len };
+        }
+
+        function GetModelHandler(str: string): ModelHandler {
+            const { ptr, len } = mallocString(str);
+
+            const ret = new ModelHandler(ptr, len);
+            __wbindgen_free(ptr, len, 1);
+            return ret;
+        }
+
+        const renderer = document.getElementById("renderer")!.children[0] as Simple3DRenderer;
+        renderer.model = JSON.stringify(ColdModel)
+        
+
+        const modelHandler = GetModelHandler(JSON.stringify(ColdModel));
+        
+    </script>
+</MainLayout>
