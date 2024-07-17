@@ -5,7 +5,9 @@ export type SpacePurpose =
     "DiningRoom" |
     "Kitchen" |
     "LivingRoom" |
-    "Unidentified";
+    "Unidentified" |
+    string
+    ;
 
 
 type Space = {
@@ -23,6 +25,10 @@ type Space = {
      purposes (e.g., a Living/Dining/Kithen space)
     */
     purposes: SpacePurpose[]
+
+    infiltration?: any
+
+    building?: string;
 }
 
 export type { Space as default }

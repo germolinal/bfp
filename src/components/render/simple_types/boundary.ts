@@ -31,6 +31,24 @@ interface BoundaryAmbientTemperature {
     temperature: Number
 }
 
-type Boundary = BoundaryGround | BoundarySpace | BoundaryAmbientTemperature;
+/**
+ *  The surface does not transmit heat
+     
+ */
+interface BoundaryAdiabatic {
+    /** The discriminant used */
+    type: "Adiabatic"
+}
+
+/**
+ *  The surface leads outdoors
+     
+ */
+interface BoundaryOutdoor {
+    /** The discriminant used */
+    type: "Outdoor"
+}
+
+type Boundary = BoundaryGround | BoundarySpace | BoundaryAmbientTemperature | BoundaryAdiabatic | BoundaryOutdoor;
 
 export type { Boundary as default };

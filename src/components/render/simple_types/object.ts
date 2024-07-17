@@ -11,6 +11,10 @@ type Point = {
  */
 type SimpleObject = {
     /**
+     * The space in which the object is located
+     */
+    space: string; 
+    /**
      * The name of the object
      */
     name: string;
