@@ -23,7 +23,7 @@ const glassMat = new THREE.MeshPhysicalMaterial({
 });
 
 export default function DrawTelevision(
-    specs: TelevisionOptions,
+    _specs: TelevisionOptions,
     dimensions: number[],
 ): THREE.Group {
     const depth = dimensions[1]

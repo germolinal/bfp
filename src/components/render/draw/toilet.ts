@@ -71,7 +71,7 @@ function seat(width: number, depth: number, height: number): THREE.Group {
 }
 
 export default function DrawToilet(
-    specs: ToiletOptions,
+    _specs: ToiletOptions,
     dimensions: number[]
 ): THREE.Group {
 

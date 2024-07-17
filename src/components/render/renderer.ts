@@ -1,5 +1,5 @@
 
-import { Scene, PerspectiveCamera, WebGLRenderer, PMREMGenerator } from "three";
+import { Scene, PerspectiveCamera, WebGLRenderer } from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import DrawSky from "./draw/sky";
 import DrawGround from "./draw/ground";
@@ -80,7 +80,6 @@ export default class Simple3DRenderer extends HTMLElement {
                     }
                 }
                 this._model = JSON.parse(newValue)
-                console.log("setting", this._model)
                 break;
             case "groundColor":
                 this.groundColor = newValue
@@ -289,7 +288,6 @@ export default class Simple3DRenderer extends HTMLElement {
                 break;
         }
         if (furniture) {
-            const height = o.dimensions.z;
             furniture.applyQuaternion(quaternion);
             furniture.position.set(position.x, position.y, position.z);
             this._scene!.add(furniture);
@@ -334,8 +332,7 @@ export default class Simple3DRenderer extends HTMLElement {
     private renderModel = () => {
         this._renderer!.render(this._scene!, this._camera!);
     };
-    private onWindowResize = () => {
-        const e = this.shadowRoot!.getElementById("canvas-container")!
+    private onWindowResize = () => {        
         let width = window.innerWidth - 300//e.offsetWidth
         let height = window.innerHeight//e.offsetHeight        
         this._camera!.aspect = width / height;

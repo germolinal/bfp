@@ -151,165 +151,164 @@ const onPrimarySolidLight = colors["on_primary_solid_light"];
             <ul id="heaters"></ul>
         </div>
     </main>
-</MainLayout>
-<script>
-    import Simple3DRenderer from "../components/render/renderer";
-    if (!customElements.get("simple-renderer")) {
-        customElements.define("simple-renderer", Simple3DRenderer);
-    }
-</script>
-<script>
-    import ColdModel from "../cold_model";
-
-    import Simple3DRenderer from "../components/render/renderer";
-
-    import {
-        memory,
-        __wbindgen_malloc,
-        __wbindgen_free,
+    <script>
+        import Simple3DRenderer from "../components/render/renderer";
+        if (!customElements.get("simple-renderer")) {
+            customElements.define("simple-renderer", Simple3DRenderer);
+        }
+        import ColdModel from "../cold_model";
+    
+        
+    
+        import {
+            memory,
+            __wbindgen_malloc,
+            __wbindgen_free,
+            // @ts-ignore
+        } from "simple-wasm/simple_wasm_bg.wasm";
         // @ts-ignore
-    } from "simple-wasm/simple_wasm_bg.wasm";
-    // @ts-ignore
-    import { ModelHandler } from "simple-wasm";
-
-    function mallocString(str: string): { ptr: any; len: number } {
-        const encoder = new TextEncoder();
-        const strBuffer = encoder.encode(str);
-        const len = strBuffer.length;
-        const ptr = __wbindgen_malloc(len, 1);
-
-        const m = new Uint8Array(memory.buffer, ptr, len);
-        m.set(strBuffer);
-
-        return { ptr, len };
-    }
-
-    function GetModelHandler(str: string): ModelHandler {
-        const { ptr, len } = mallocString(str);
-
-        const ret = new ModelHandler(ptr, len);
-        __wbindgen_free(ptr, len, 1);
-        return ret;
-    }
-
-    const renderer = document.getElementById("renderer")!
-        .children[0] as Simple3DRenderer;
-    renderer.model = JSON.stringify(ColdModel);
-
-    const setTemp = document.getElementById("set-temp")! as HTMLInputElement;
-    setTemp.oninput = () => {
-        let t = Math.round(parseFloat(setTemp.value));
-        document.getElementById("ext-temp")!.innerText = `${t} C`;
-    };
-    // @ts-ignore
-    setTemp.oninput();
-
-    document.getElementById("initalize-demo")!.onclick = () => {
-        const banner = document.getElementById("initialize-banner")!;
-        const modelHandler = GetModelHandler(JSON.stringify(ColdModel));
-
-        banner.innerHTML = `<style>.loader {
-                border: 16px solid transparent; /* Light grey */
-                border-top: 16px solid #0071e3; 
-                border-bottom: 16px solid #0071e3; 
-                border-radius: 50%;
-                width: 60px;
-                height: 60px;
-                animation: spin 2s linear infinite;
-                margin: 0 auto;
-            }
-
-            @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); 
-            }
-        }</style><div class="loader"></div>`;
-        modelHandler.pre_process();
-        banner.remove();
-
-
-        let temps: any[] = [];
-        let tempList = document.getElementById("temps")!;
-        ColdModel.spaces.forEach((s, i) => {
-            let index = modelHandler.get_space_temperature_index(i);
-            let name = s.name;
-
-            let li = document.createElement("li");
-            li.innerHTML = `<span>${name}</span>`;
-            let span = document.createElement("span");
-            li.appendChild(span);
-            tempList.appendChild(li);
-
-            temps.push({
-                index,
-                span,
-            });
-        });
-
-        let hvacList = document.getElementById("heaters")!;
-        let hvacs: any[] = [];
-        ColdModel.hvacs.forEach((s, i) => {
-            let index = modelHandler.get_hvac_power_index(i);
-            let name = s.name;
-
-            let li = document.createElement("li");
-            li.innerHTML = `<span>${name}</span>`;            
-            let span = document.createElement("span");
-            li.appendChild(span);
-            li.onclick = ()=>{
-                li.classList.toggle("on");
-                if (li.classList.contains("on")){
-                    // it is now on
-                    setStateElement(index, 1000)
-                }else{
-                    // it is now off
-                    setStateElement(index, 0)
+        import { ModelHandler } from "simple-wasm";
+    
+        function mallocString(str: string): { ptr: any; len: number } {
+            const encoder = new TextEncoder();
+            const strBuffer = encoder.encode(str);
+            const len = strBuffer.length;
+            const ptr = __wbindgen_malloc(len, 1);
+    
+            const m = new Uint8Array(memory.buffer, ptr, len);
+            m.set(strBuffer);
+    
+            return { ptr, len };
+        }
+    
+        function GetModelHandler(str: string): ModelHandler {
+            const { ptr, len } = mallocString(str);
+    
+            const ret = new ModelHandler(ptr, len);
+            __wbindgen_free(ptr, len, 1);
+            return ret;
+        }
+    
+        const renderer = document.getElementById("renderer")!
+            .children[0] as Simple3DRenderer;        
+        renderer.model = JSON.stringify(ColdModel);
+    
+        const setTemp = document.getElementById("set-temp")! as HTMLInputElement;
+        setTemp.oninput = () => {
+            let t = Math.round(parseFloat(setTemp.value));
+            document.getElementById("ext-temp")!.innerText = `${t} C`;
+        };
+        // @ts-ignore
+        setTemp.oninput();
+    
+        document.getElementById("initalize-demo")!.onclick = () => {
+            const banner = document.getElementById("initialize-banner")!;
+            const modelHandler = GetModelHandler(JSON.stringify(ColdModel));
+    
+            banner.innerHTML = `<style>.loader {
+                    border: 16px solid transparent; /* Light grey */
+                    border-top: 16px solid #0071e3; 
+                    border-bottom: 16px solid #0071e3; 
+                    border-radius: 50%;
+                    width: 60px;
+                    height: 60px;
+                    animation: spin 2s linear infinite;
+                    margin: 0 auto;
                 }
-            }
-
-            hvacList.appendChild(li);            
-            hvacs.push({
-                index,
-                span,
+    
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); 
+                }
+            }</style><div class="loader"></div>`;
+            modelHandler.pre_process();
+            banner.remove();
+    
+    
+            let temps: any[] = [];
+            let tempList = document.getElementById("temps")!;
+            ColdModel.spaces.forEach((s, i) => {
+                let index = modelHandler.get_space_temperature_index(i);
+                let name = s.name;
+    
+                let li = document.createElement("li");
+                li.innerHTML = `<span>${name}</span>`;
+                let span = document.createElement("span");
+                li.appendChild(span);
+                tempList.appendChild(li);
+    
+                temps.push({
+                    index,
+                    span,
+                });
             });
-        });
-
-        let state = modelHandler.get_state();
-        let stateLen = modelHandler.state_len();
-        const getStateElement = (i: number) => {
-            if (i < 0 || i >= stateLen) {
-                throw new Error(
-                    `Index out of bounds!... got ${i} when state's length is ${stateLen}`,
-                );
-            }
-            const stateData = new Float64Array(memory.buffer, state, stateLen);
-            return Math.round(stateData[i] * 10) / 10;
-        };
-        const setStateElement = (i: number, v: number) => {
-            if (i < 0 || i >= stateLen) {
-                throw new Error(
-                    `Index out of bounds!... got ${i} when state's length is ${stateLen}`,
-                );
-            }
-            const stateData = new Float64Array(memory.buffer, state, stateLen);
-            stateData[i]=v
-        };
-
-        const renderLoop = () => {
-            modelHandler.march(parseFloat(setTemp.value));
-            temps.forEach((v) => {
-                let { index, span } = v;
-                let t = getStateElement(index);
-                span.innerText = `${t} C`;
+    
+            let hvacList = document.getElementById("heaters")!;
+            let hvacs: any[] = [];
+            ColdModel.hvacs.forEach((s, i) => {
+                let index = modelHandler.get_hvac_power_index(i);
+                let name = s.name;
+    
+                let li = document.createElement("li");
+                li.innerHTML = `<span>${name}</span>`;            
+                let span = document.createElement("span");
+                li.appendChild(span);
+                li.onclick = ()=>{
+                    li.classList.toggle("on");
+                    if (li.classList.contains("on")){
+                        // it is now on
+                        setStateElement(index, 1000)
+                    }else{
+                        // it is now off
+                        setStateElement(index, 0)
+                    }
+                }
+    
+                hvacList.appendChild(li);            
+                hvacs.push({
+                    index,
+                    span,
+                });
             });
-            hvacs.forEach((v) => {
-                let { index, span } = v;
-                let t = getStateElement(index);
-                span.innerText = `${t} W`;
-            });
-
-            requestAnimationFrame(renderLoop);
+    
+            let state = modelHandler.get_state();
+            let stateLen = modelHandler.state_len();
+            const getStateElement = (i: number) => {
+                if (i < 0 || i >= stateLen) {
+                    throw new Error(
+                        `Index out of bounds!... got ${i} when state's length is ${stateLen}`,
+                    );
+                }
+                const stateData = new Float64Array(memory.buffer, state, stateLen);
+                return Math.round(stateData[i] * 10) / 10;
+            };
+            const setStateElement = (i: number, v: number) => {
+                if (i < 0 || i >= stateLen) {
+                    throw new Error(
+                        `Index out of bounds!... got ${i} when state's length is ${stateLen}`,
+                    );
+                }
+                const stateData = new Float64Array(memory.buffer, state, stateLen);
+                stateData[i]=v
+            };
+    
+            const renderLoop = () => {
+                modelHandler.march(parseFloat(setTemp.value));
+                temps.forEach((v) => {
+                    let { index, span } = v;
+                    let t = getStateElement(index);
+                    span.innerText = `${t} C`;
+                });
+                hvacs.forEach((v) => {
+                    let { index, span } = v;
+                    let t = getStateElement(index);
+                    span.innerText = `${t} W`;
+                });
+    
+                requestAnimationFrame(renderLoop);
+            };
+            renderLoop();
         };
-        renderLoop();
-    };
-</script>
+    </script>
+</MainLayout>
+

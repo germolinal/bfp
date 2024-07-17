@@ -40,7 +40,7 @@ function getShape(vertices: number[], transform: THREE.Matrix4): THREE.Shape {
     return _shape;
 }
 
-function getLocalReferenceFrame(surface: any):{e1: THREE.Vector3, e2:THREE.Vector3, normal: THREE.Vector3, vertices: any}{
+function getLocalReferenceFrame(surface: any): { e1: THREE.Vector3, e2: THREE.Vector3, normal: THREE.Vector3, vertices: any } {
     if (surface.vertices.length % 3 !== 0) {
         throw new Error('The number of elements in Polygon must be multiple of three... found ${surface.vertices.length}');
     }
@@ -71,10 +71,10 @@ function getLocalReferenceFrame(surface: any):{e1: THREE.Vector3, e2:THREE.Vecto
     let normal: THREE.Vector3 = e1.clone().cross(aux).normalize();
     const e2: THREE.Vector3 = normal.clone().cross(e1).normalize();
 
-    return {e1, e2, normal, vertices}
+    return { e1, e2, normal, vertices }
 }
 
-function ExtrudedSurface(scene: THREE.Scene, { surface, thickness, indoorMaterial, outdoorMaterial, layers }: {
+function ExtrudedSurface(scene: THREE.Scene, { surface, thickness, indoorMaterial, outdoorMaterial }: {
     surface: Surface | Fenestration,
     thickness: number
     indoorMaterial: any,
@@ -87,7 +87,7 @@ function ExtrudedSurface(scene: THREE.Scene, { surface, thickness, indoorMateria
         throw new Error(`The number of elements in Polygon must be multiple of three... found ${surface.vertices.length}`);
     }
 
-    const {e1, e2, normal, vertices}= getLocalReferenceFrame(surface);
+    const { e1, e2, normal, vertices } = getLocalReferenceFrame(surface);
 
     const origin = new THREE.Vector3(vertices[0], vertices[1], vertices[2]);
     const rot = new THREE.Matrix4().makeBasis(e1, e2, normal)
@@ -124,7 +124,7 @@ function ExtrudedSurface(scene: THREE.Scene, { surface, thickness, indoorMateria
         backThickness = thickness / 2.0
     }
 
-    
+
     const frontDisp = normal.multiplyScalar(frontDispNorm * 1.005);
     const frontGeometry = new THREE.ExtrudeGeometry(shape, {
         depth: frontThickness,
@@ -135,7 +135,7 @@ function ExtrudedSurface(scene: THREE.Scene, { surface, thickness, indoorMateria
     const frontMesh = new THREE.Mesh(frontGeometry, frontMat);
     frontMesh.position.set(frontDelta.x, frontDelta.y, frontDelta.z)
     frontMesh.applyQuaternion(quaternion)
-    frontMesh.receiveShadow=true;
+    frontMesh.receiveShadow = true;
     scene.add(frontMesh)
 
     const backDisp = normal.multiplyScalar(backDispNorm);
@@ -148,9 +148,9 @@ function ExtrudedSurface(scene: THREE.Scene, { surface, thickness, indoorMateria
     const backMesh = new THREE.Mesh(backGeometry, backMat);
     backMesh.position.set(backDelta.x, backDelta.y, backDelta.z)
     backMesh.applyQuaternion(quaternion)
-    backMesh.receiveShadow=true;
+    backMesh.receiveShadow = true;
     scene.add(backMesh)
-    
+
     return { frontMesh, backMesh };
 }
 
@@ -163,7 +163,7 @@ function DoorFrame(scene: THREE.Scene, { surface, frameThickness, frameMaterial 
         throw new Error(`The number of elements in Polygon must be multiple of three... found ${surface.vertices.length}`);
     }
 
-    const {e1, e2, normal, vertices}= getLocalReferenceFrame(surface);
+    const { normal, vertices } = getLocalReferenceFrame(surface);
 
     // Iterate through loop to get x,y,z coordinates
     let sumX = 0, sumY = 0, sumZ = 0;
@@ -176,7 +176,7 @@ function DoorFrame(scene: THREE.Scene, { surface, frameThickness, frameMaterial 
     const centerX = sumX / (vertices.length / 3);
     const centerY = sumY / (vertices.length / 3);
     const centerZ = sumZ / (vertices.length / 3);
-    
+
     for (let i = 0; i < vertices.length; i += 3) {
         const scaleFactor = 1.03;
 
@@ -186,7 +186,7 @@ function DoorFrame(scene: THREE.Scene, { surface, frameThickness, frameMaterial 
             centerY + (vertices[i + 1] - centerY) * scaleFactor,
             centerZ + (vertices[i + 2] - centerZ) * scaleFactor
         );
-        
+
         // Increase the size of endPoint
         const nextIndex = (i + 3) % vertices.length; // Connect back to the first point
         const endPoint = new THREE.Vector3(
@@ -194,32 +194,32 @@ function DoorFrame(scene: THREE.Scene, { surface, frameThickness, frameMaterial 
             centerY + (vertices[nextIndex + 1] - centerY) * scaleFactor,
             centerZ + (vertices[nextIndex + 2] - centerZ) * scaleFactor
         );
-    
+
         // Calculate the direction vector and distance between start and end points
         const direction = new THREE.Vector3().copy(endPoint).sub(startPoint);
         const distance = direction.length();
-    
+
         // Calculate the midpoint between start and end points
         const midpoint = new THREE.Vector3().copy(startPoint).add(endPoint).multiplyScalar(0.5);
-    
+
         // Calculate the rotation of the frame mesh using the local reference frame
         const rotationMatrix = new THREE.Matrix4().lookAt(startPoint, endPoint, normal);
-    
+
         // Create the frame geometry
-        const frameGeometry = new THREE.BoxGeometry(frameThickness*2, frameThickness*2, distance*1);
+        const frameGeometry = new THREE.BoxGeometry(frameThickness * 2, frameThickness * 2, distance * 1);
         // Create the frame mesh
         const frontMesh = new THREE.Mesh(frameGeometry, frameMaterial);
         const backMesh = new THREE.Mesh(frameGeometry, frameMaterial);
-        
+
         // Define the offset for the first frame
-        const offsetFirstFrame = normal.clone().multiplyScalar(-0.1 /2);
-        
+        const offsetFirstFrame = normal.clone().multiplyScalar(-0.1 / 2);
+
         // Define the offset for the second frame
         const offsetSecondFrame = normal.clone().multiplyScalar(0.02 / 2);
-        
+
         // Position the first frame mesh
         const firstFrameMeshPosition = midpoint.clone().add(offsetFirstFrame);
-        
+
         // Position the second frame mesh
         const secondFrameMeshPosition = midpoint.clone().add(offsetSecondFrame);
 
@@ -234,7 +234,7 @@ function DoorFrame(scene: THREE.Scene, { surface, frameThickness, frameMaterial 
     }
 }
 
-export function DrawSurface(scene: THREE.Scene, { surface, layers, floorColor, ceilingColor, indoorWallColor, outdoorWallColor}: {
+export function DrawSurface(scene: THREE.Scene, { surface, layers, floorColor, ceilingColor, indoorWallColor, outdoorWallColor }: {
     surface: Surface,
     layers: THREE.Layers,
     floorColor: string,
@@ -263,15 +263,15 @@ export function DrawSurface(scene: THREE.Scene, { surface, layers, floorColor, c
     // Color
     const woodColor = woodTextureLoader.load("/renderer/woodFloorColor.jpg")
     woodColor.wrapS = woodColor.wrapT = THREE.RepeatWrapping
-    woodColor.repeat.set(0.4,0.4)
+    woodColor.repeat.set(0.4, 0.4)
     // Normal map
     const woodNormal = woodTextureLoader.load("/renderer/woodFloorNormal.jpg")
     woodNormal.wrapS = woodNormal.wrapT = THREE.RepeatWrapping
-    woodNormal.repeat.set(0.4,0.4)
+    woodNormal.repeat.set(0.4, 0.4)
     // Displacement
     const woodDisplacement = woodTextureLoader.load("/renderer/woodFloorDisp.png")
     woodDisplacement.wrapS = woodDisplacement.wrapT = THREE.RepeatWrapping
-    woodDisplacement.repeat.set(0.4,0.4)
+    woodDisplacement.repeat.set(0.4, 0.4)
 
     const indoorFloorMat = new THREE.MeshPhysicalMaterial({
         color: floorColor,
@@ -283,13 +283,13 @@ export function DrawSurface(scene: THREE.Scene, { surface, layers, floorColor, c
         reflectivity: 1.0,
         map: woodColor,
         normalMap: woodNormal,
-        normalScale: new THREE.Vector2(1,1),
+        normalScale: new THREE.Vector2(1, 1),
         displacementMap: woodDisplacement,
         displacementScale: 0.1,
-        displacementBias:-0.05,
+        displacementBias: -0.05,
         roughnessMap: woodRough,
         aoMap: woodOcc,
-        aoMapIntensity:1,
+        aoMapIntensity: 1,
     });
 
     const ceilingMat = new THREE.MeshPhysicalMaterial({
@@ -300,7 +300,7 @@ export function DrawSurface(scene: THREE.Scene, { surface, layers, floorColor, c
         roughness: 1,
         metalness: 0.0,
         reflectivity: 0.0,
-        envMapIntensity:0
+        envMapIntensity: 0
     });
     const indoorWallMat = new THREE.MeshPhysicalMaterial({
         color: indoorWallColor,
@@ -384,7 +384,7 @@ export function DrawFenestration(scene: THREE.Scene, { surface, layers, doorColo
     let knobMaterial = doorKnob
     let thickness = 0.005
     let mat = windowMat
-    
+
     const doorFrame = new THREE.MeshPhysicalMaterial()
     doorFrame.color.set(0xffffff)
     doorFrame.clipShadows = true;
@@ -398,14 +398,14 @@ export function DrawFenestration(scene: THREE.Scene, { surface, layers, doorColo
 
     DoorFrame(scene, {
         surface,
-        frameThickness:frameThickness,
+        frameThickness: frameThickness,
         frameMaterial: frame,
     });
     if (surface.category && surface.category === "Door") {
         mat = doorMat;
-        thickness = 0.08;  
+        thickness = 0.08;
     }
-    const doorMesh = ExtrudedSurface(scene,{
+    const doorMesh = ExtrudedSurface(scene, {
         indoorMaterial: mat,
         outdoorMaterial: mat,
         surface,
@@ -415,8 +415,8 @@ export function DrawFenestration(scene: THREE.Scene, { surface, layers, doorColo
 
     if (surface.category && surface.category === "Door" && doorMesh) {
         // Rotate door by 10 degrees
-        const rotationAngle = 15 * Math.PI / 180; 
-        const rotationAxis = new THREE.Vector3(0, -1, 0); 
+        const rotationAngle = 15 * Math.PI / 180;
+        const rotationAxis = new THREE.Vector3(0, -1, 0);
         const doorRotation = new THREE.Quaternion().setFromAxisAngle(rotationAxis, rotationAngle);
         doorMesh.frontMesh.applyQuaternion(doorRotation);
         doorMesh.backMesh.applyQuaternion(doorRotation);
@@ -426,7 +426,7 @@ export function DrawFenestration(scene: THREE.Scene, { surface, layers, doorColo
         knobMaterial = doorKnob
         const knob = new THREE.Mesh(knobGeometry, knobMaterial);
 
-        const knobPositionFront = new THREE.Vector3(1, 0.8, 0.09); 
+        const knobPositionFront = new THREE.Vector3(1, 0.8, 0.09);
         knob.position.copy(knobPositionFront);
         doorMesh.frontMesh.add(knob.clone());
 

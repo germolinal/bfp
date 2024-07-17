@@ -47,7 +47,7 @@ function wall(width: number, depth: number, height: number, rotationX: number, r
 }
 
 export default function DrawBathtub(
-    specs: BathtubOptions,
+    _specs: BathtubOptions,
     dimensions: number[],
 ): THREE.Group {
 

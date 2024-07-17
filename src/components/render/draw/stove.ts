@@ -12,7 +12,7 @@ const glassMat = new THREE.MeshStandardMaterial({
 });
 
 export default function DrawStove(
-    specs: StoveOptions,
+    _specs: StoveOptions,
     dimensions: number[],
 ): THREE.Group {
     const depth = dimensions[1]

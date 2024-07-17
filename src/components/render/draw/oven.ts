@@ -30,7 +30,7 @@ const levelMaterial = new THREE.MeshStandardMaterial({
 });
 
 export default function DrawOven(
-    specs: OvenOptions,
+    _specs: OvenOptions,
     dimensions: [number, number, number],
 ): THREE.Group {
     const width = dimensions[0]

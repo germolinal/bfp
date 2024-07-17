@@ -4,7 +4,6 @@ import type HVAC from "./hvac"
 import type Luminaire from "./luminaire";
 import type Space from "./space";
 import type SimpleObject from "./object";
-import type { output } from "three/examples/jsm/nodes/Nodes.js";
 
 /**
  * A description of a SimpleModel

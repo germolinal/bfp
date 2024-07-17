@@ -22,7 +22,7 @@ const doorMat = new THREE.MeshStandardMaterial({
 
 
 export default function DrawRefrigerator(
-    specs: RefrigeratorOptions,
+    _specs: RefrigeratorOptions,
     dimensions: number[],
 ): THREE.Group {
     const width = dimensions[0]

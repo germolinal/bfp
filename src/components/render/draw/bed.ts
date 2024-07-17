@@ -81,7 +81,7 @@ const blanketMat = new THREE.MeshStandardMaterial({
 });
 
 export default function DrawBed(
-    specs: BedOptions,
+    _specs: BedOptions,
     dimensions: number[],
     blanketColor: string,
 ): THREE.Group {

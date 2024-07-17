@@ -115,7 +115,7 @@ function leg(x: number, y: number, dimensions: number[]): THREE.Mesh {
 
 function addLegs(
     group: THREE.Group,
-    specs: TableOptions,
+    _specs: TableOptions,
     dimensions: number[]
 ) {
 

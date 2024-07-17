@@ -43,7 +43,7 @@ function legs(specs: ChairOptions, height: number, delta: number, dimensions: nu
     }
 
     const ret = new THREE.Group()
-    legPositions.forEach((v, i) => {
+    legPositions.forEach((v) => {
         const geo = new THREE.CylinderGeometry(R, R, height, 24)
         const m = new THREE.Mesh(geo, legMat)
         m.position.set(v[0], v[1], v[2])

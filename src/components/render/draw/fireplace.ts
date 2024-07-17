@@ -15,7 +15,7 @@ const bodyMat = new THREE.MeshPhysicalMaterial( {
 
 
 export default function DrawFireplace(
-    specs: FireplaceOptions,
+    _specs: FireplaceOptions,
     dimensions: [number,number,number],
 ): THREE.Group {    
     const width = dimensions[0] 

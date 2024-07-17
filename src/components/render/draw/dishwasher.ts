@@ -24,7 +24,7 @@ const doorMat = new THREE.MeshPhysicalMaterial({
 
 
 export default function DrawDishwasher(
-    specs: DishwasherOptions,
+    _specs: DishwasherOptions,
     dimensions: [number, number, number],
 ): THREE.Group {
     const width = dimensions[0]

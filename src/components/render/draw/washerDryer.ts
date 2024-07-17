@@ -1,5 +1,5 @@
 import * as THREE from "three"
-import type { ToiletOptions, WasherDryerOptions } from "../simple_types/object_specs"
+import type {  WasherDryerOptions } from "../simple_types/object_specs"
 
 const material = new THREE.MeshStandardMaterial({
     color: "white",
@@ -23,7 +23,7 @@ const glassMaterial = new THREE.MeshStandardMaterial({
 
 
 export function DrawWasherDryer(
-    specs: WasherDryerOptions,
+    _specs: WasherDryerOptions,
     dimensions: [number, number, number]
 ): THREE.Group {
 
@@ -33,7 +33,7 @@ export function DrawWasherDryer(
 
     const ret = new THREE.Group()
     // Body
-    const bodyGeo = new THREE.BoxGeometry(dimensions[0], dimensions[2], dimensions[1])
+    const bodyGeo = new THREE.BoxGeometry(width, height, depth)
     const bodyMesh = new THREE.Mesh(bodyGeo, material)
     bodyMesh.castShadow = true;
     ret.add(bodyMesh)

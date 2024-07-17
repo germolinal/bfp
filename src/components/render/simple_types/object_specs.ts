@@ -58,6 +58,7 @@ export type BathtubOptions = ObjectTypeCore
 export type FireplaceOptions = ObjectTypeCore
 
 type ObjectSpec =
+    ToiletOptions |
     TableOptions |
     SofaOptions |
     ChairOptions |

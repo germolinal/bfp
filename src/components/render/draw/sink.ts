@@ -51,7 +51,7 @@ function vase(width: number, depth: number, height: number): THREE.Group {
 }
 
 export default function DrawSink(
-    specs: SinkOptions,
+    _specs: SinkOptions,
     dimensions: number[]
 ): THREE.Group {
 
