@@ -80,6 +80,7 @@ export default class Simple3DRenderer extends HTMLElement {
                     }
                 }
                 this._model = JSON.parse(newValue)
+                console.log("setting", this._model)
                 break;
             case "groundColor":
                 this.groundColor = newValue
