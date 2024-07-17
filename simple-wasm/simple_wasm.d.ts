@@ -22,8 +22,9 @@ export class ModelHandler {
   state_len(): number;
 /**
 * @param {number} tout
+* @param {number} global_horizontal_rad
 */
-  march(tout: number): void;
+  march(tout: number, global_horizontal_rad: number): void;
 /**
 * @param {number} i
 * @returns {number}

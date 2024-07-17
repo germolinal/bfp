@@ -1,4 +1,4 @@
-import type SimpleModel from "./components/render/simple_types/simple_model";
+import type SimpleModel from "../components/render/simple_types/simple_model";
 const model: SimpleModel = {
     buildings: [
         {
@@ -1094,8 +1094,8 @@ const model: SimpleModel = {
         standard_meridian: 180.0,
     },
     solar_options: {
-        n_solar_irradiance_points: 10,
-        solar_ambient_divitions: 300,
+        n_solar_irradiance_points: 1,
+        solar_ambient_divitions: 1,
         solar_sky_discretization: 1,
         
     },

@@ -176,9 +176,10 @@ export class ModelHandler {
     }
     /**
     * @param {number} tout
+    * @param {number} global_horizontal_rad
     */
-    march(tout) {
-        wasm.modelhandler_march(this.__wbg_ptr, tout);
+    march(tout, global_horizontal_rad) {
+        wasm.modelhandler_march(this.__wbg_ptr, tout, global_horizontal_rad);
     }
     /**
     * @param {number} i
