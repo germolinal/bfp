@@ -1,0 +1,17 @@
+{
+  "name": "simple-wasm",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "simple_wasm_bg.wasm",
+    "simple_wasm.js",
+    "simple_wasm_bg.js",
+    "simple_wasm.d.ts"
+  ],
+  "main": "simple_wasm.js",
+  "types": "simple_wasm.d.ts",
+  "sideEffects": [
+    "./simple_wasm.js",
+    "./snippets/*"
+  ]
+}

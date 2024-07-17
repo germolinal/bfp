@@ -19,7 +19,7 @@
     "@fontsource-variable/montserrat": "^5.0.19",
     "@playform/compress": "^0.0.13",
     "astro": "^4.11.5",
-    "simple-wasm": "../simple-wasm/pkg",
+    "simple-wasm": "./simple-wasm",
     "three": "0.166",
     "typescript": "^5.5.3"
   }
