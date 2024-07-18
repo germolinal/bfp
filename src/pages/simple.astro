@@ -23,6 +23,10 @@ const primaryOutlineDark = colors["primary_outline_dark"];
             padding: 60px 1em;
         }
 
+        div.img {
+            margin: 0 auto;
+            width: fit-content;
+        }
         img {
             max-width: 90vw;
         }
@@ -104,17 +108,19 @@ const primaryOutlineDark = colors["primary_outline_dark"];
         </code>
         <p>A Building Performance Simulation tool for modern times</p>
 
-        <picture>
-            <source
-                srcset="/simple_resources_light.png"
-                media="(prefers-color-scheme: light)"
-            />
-            <source
-                srcset="/simple_resources_dark.png"
-                media="(prefers-color-scheme: dark)"
-            />
-            <img src="/simple_resources_light.png" />
-        </picture>
+        <div class="img">
+            <picture>
+                <source
+                    srcset="/simple_resources_light.png"
+                    media="(prefers-color-scheme: light)"
+                />
+                <source
+                    srcset="/simple_resources_dark.png"
+                    media="(prefers-color-scheme: dark)"
+                />
+                <img src="/simple_resources_light.png" />
+            </picture>
+        </div>
         <div id="actions">
             <a href="https://germolinal.github.io/simple_docs/">
                 <small> Check </small>
