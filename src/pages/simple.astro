@@ -1,0 +1,149 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import colors from "../colors";
+const primaryOutlineLight = colors["primary_outline_light"];
+const primarySolidLight = colors["primary_solid_light"];
+const onPrimarySolidLight = colors["on_primary_solid_light"];
+const primaryOutlineDark = colors["primary_outline_dark"];
+---
+
+<MainLayout
+    title="SIMPLE simulation"
+    description="About the SIMPLE simulation engine"
+>
+    <style
+        define:vars={{
+            primaryOutlineLight,
+            primarySolidLight,
+            onPrimarySolidLight,
+            primaryOutlineDark,
+        }}
+    >
+        main {
+            padding: 60px 1em;
+        }
+
+        img {
+            max-width: 90vw;
+        }
+        #title {
+            margin-bottom: 0.3em;
+        }
+        p,
+        h1 {
+            width: 100%;
+            text-align: center;
+            max-width: 600px;
+            margin: 0em auto;
+            margin-bottom: 2em;
+        }
+        section {
+            margin-top: 4em;
+        }
+        section p {
+            margin-bottom: 0.5em;
+            line-height: 1.5em;
+        }
+        section h1 {
+            margin-bottom: 0.8em;
+            font-size: 1.28rem;
+        }
+        #slogan {
+            display: block;
+            width: fit-content;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            font-weight: 100;
+            margin-top: 2em;
+            margin-bottom: 3em;
+        }
+        #actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 1em;
+        }
+        a,
+        a:visited {
+            text-decoration: none;
+            color: inherit;
+        }
+        #actions > a {
+            margin: 0.5em;
+            text-align: center;
+            padding: 0.5em 2em;
+            border-radius: 1.4em;
+            color: var(--primaryOutlineLight);
+            border: 1px solid var(--primaryOutlineLight);
+        }
+        #actions > a:first-child {
+            color: var(--onPrimarySolidLight);
+            background-color: var(--primarySolidLight);
+            border: none;
+            padding: 0.5em 1em;
+        }
+        #actions > a > span {
+            margin: 0;
+            margin-top: 0.1em;
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+        @media (prefers-color-scheme: dark) {
+            #actions > a {
+                color: var(--primaryOutlineDark);
+                border: 1px solid var(--primaryOutlineDark);
+            }
+        }
+    </style>
+    <main>
+        <code id="slogan">
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b>[SIM]</b>ulating
+            <br />
+            for peo<b>[PLE]</b>
+        </code>
+        <p>A Building Performance Simulation tool for modern times</p>
+
+        <picture>
+            <source
+                srcset="/simple_resources_light.png"
+                media="(prefers-color-scheme: light)"
+            />
+            <source
+                srcset="/simple_resources_dark.png"
+                media="(prefers-color-scheme: dark)"
+            />
+            <img src="/simple_resources_light.png" />
+        </picture>
+        <div id="actions">
+            <a href="https://germolinal.github.io/simple_docs/">
+                <small> Check </small>
+                <span>The Documentation</span>
+            </a>
+
+            <a href="/simple_demo">
+                <small> Check </small>
+                <span>A Demo</span>
+            </a>
+        </div>
+        <section>
+            <h1>Holistic analysis of buildings</h1>
+            <p>
+                People perceive the world holistically. We need to analyse our
+                buildings in the same way.
+            </p>
+            <p>
+                <code>SIMPLE</code> currently can perform lighting and thermal analyses.
+                And we cannot wait to add other domains!
+            </p>
+        </section>
+        <section>
+            <h1>Deploy nearly everywhere</h1>
+            <p>
+                <code>SIMPLE</code> aims to provide full flexibility, allowing you
+                to run locally, on the cloud, on a container, or combinations of
+                these. It accomplishes this by utilizing modern technologies.
+            </p>
+        </section>
+    </main>
+</MainLayout>
