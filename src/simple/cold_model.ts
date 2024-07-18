@@ -1094,8 +1094,8 @@ const model: SimpleModel = {
         standard_meridian: 180.0,
     },
     solar_options: {
-        n_solar_irradiance_points: 1,
-        solar_ambient_divitions: 1,
+        n_solar_irradiance_points: 10,
+        solar_ambient_divitions: 300,
         solar_sky_discretization: 1,
         
     },
