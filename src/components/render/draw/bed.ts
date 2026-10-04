@@ -1,7 +1,8 @@
+import { withBase } from "../../../utils/base";
 import * as THREE from "three"
 import type { BedOptions } from "../simple_types/object_specs"
 
-const woodTexture = new THREE.TextureLoader().load('/renderer/bedTexture.jpg')
+const woodTexture = new THREE.TextureLoader().load(withBase('/renderer/bedTexture.jpg'))
 woodTexture.wrapS=woodTexture.wrapT=THREE.RepeatWrapping
 woodTexture.repeat.set(0.3,0.3)
 

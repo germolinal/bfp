@@ -1,4 +1,5 @@
 ---
+import { withBase } from "../utils/base";
 import MainLayout from "../layouts/MainLayout.astro";
 import colors from "../colors";
 
@@ -118,18 +119,18 @@ const primaryOutlineDark = colors["primary_outline_dark"]
                     factors that affect people's comfort and behaviour.
                 </p>
 
-                <a href="/atlas">Check it out</a>
+                <a href={withBase("/atlas")}>Check it out</a>
             </div>
             <picture>
                 <source
-                    srcset="/atlas_light.png"
+                    srcset={withBase("/atlas_light.png")}
                     media="(prefers-color-scheme: light)"
                 />
                 <source
-                    srcset="/atlas_dark.png"
+                    srcset={withBase("/atlas_dark.png")}
                     media="(prefers-color-scheme: dark)"
                 />
-                <img src="/atlas_light.png" />
+                <img src={withBase("/atlas_light.png")} />
             </picture>
         </div>
 
@@ -143,18 +144,18 @@ const primaryOutlineDark = colors["primary_outline_dark"]
                     different distribution channels (e.g., web, cloud, app, PC,
                     and more).
                 </p>
-                <a href="/simple">Check it out</a>
+                <a href={withBase("/simple")}>Check it out</a>
             </div>
             <picture>
                 <source
-                    srcset="/simple_resources_light.png"
+                    srcset={withBase("/simple_resources_light.png")}
                     media="(prefers-color-scheme: light)"
                 />
                 <source
-                    srcset="/simple_resources_dark.png"
+                    srcset={withBase("/simple_resources_dark.png")}
                     media="(prefers-color-scheme: dark)"
                 />
-                <img src="/simple_resources_light.png" />
+                <img src={withBase("/simple_resources_light.png")} />
             </picture>
         </div>
 

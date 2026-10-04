@@ -1,4 +1,5 @@
 ---
+import { withBase } from "../utils/base";
 import MainLayout from "../layouts/MainLayout.astro";
 import colors from "../colors";
 const primaryOutlineLight = colors["primary_outline_light"];
@@ -111,14 +112,14 @@ const primaryOutlineDark = colors["primary_outline_dark"];
         <div class="img">
             <picture>
                 <source
-                    srcset="/simple_resources_light.png"
+                    srcset={withBase("/simple_resources_light.png")}
                     media="(prefers-color-scheme: light)"
                 />
                 <source
-                    srcset="/simple_resources_dark.png"
+                    srcset={withBase("/simple_resources_dark.png")}
                     media="(prefers-color-scheme: dark)"
                 />
-                <img src="/simple_resources_light.png" />
+                <img src={withBase("/simple_resources_light.png")} />
             </picture>
         </div>
         <div id="actions">
@@ -127,7 +128,7 @@ const primaryOutlineDark = colors["primary_outline_dark"];
                 <span>The Documentation</span>
             </a>
 
-            <a href="/simple_demo">
+            <a href={withBase("/simple_demo")}>
                 <small> Check </small>
                 <span>A Demo</span>
             </a>

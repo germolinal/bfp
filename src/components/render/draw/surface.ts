@@ -1,3 +1,4 @@
+import { withBase } from "../../../utils/base";
 import * as THREE from "three"
 
 import type Surface from '../simple_types/surface';
@@ -251,25 +252,25 @@ export function DrawSurface(scene: THREE.Scene, { surface, layers, floorColor, c
     // }
     const woodTextureLoader = new THREE.TextureLoader();
     // Ambient Occlusion
-    const woodOcc = woodTextureLoader.load("/renderer/woodFloorOcc.jpg")
+    const woodOcc = woodTextureLoader.load(withBase("/renderer/woodFloorOcc.jpg"))
     woodOcc.wrapS = woodOcc.wrapT = THREE.RepeatWrapping;
     woodOcc.repeat.set(0.5, 0.5);
     // Set the occlusion to uv2
     woodOcc.channel = 2;
     // Roughness Map
-    const woodRough = woodTextureLoader.load("/renderer/woodFloorRough.jpg")
+    const woodRough = woodTextureLoader.load(withBase("/renderer/woodFloorRough.jpg"))
     woodRough.wrapS = woodOcc.wrapT = THREE.RepeatWrapping
     woodRough.repeat.set(0.4, 0.4)
     // Color
-    const woodColor = woodTextureLoader.load("/renderer/woodFloorColor.jpg")
+    const woodColor = woodTextureLoader.load(withBase("/renderer/woodFloorColor.jpg"))
     woodColor.wrapS = woodColor.wrapT = THREE.RepeatWrapping
     woodColor.repeat.set(0.4, 0.4)
     // Normal map
-    const woodNormal = woodTextureLoader.load("/renderer/woodFloorNormal.jpg")
+    const woodNormal = woodTextureLoader.load(withBase("/renderer/woodFloorNormal.jpg"))
     woodNormal.wrapS = woodNormal.wrapT = THREE.RepeatWrapping
     woodNormal.repeat.set(0.4, 0.4)
     // Displacement
-    const woodDisplacement = woodTextureLoader.load("/renderer/woodFloorDisp.png")
+    const woodDisplacement = woodTextureLoader.load(withBase("/renderer/woodFloorDisp.png"))
     woodDisplacement.wrapS = woodDisplacement.wrapT = THREE.RepeatWrapping
     woodDisplacement.repeat.set(0.4, 0.4)
 

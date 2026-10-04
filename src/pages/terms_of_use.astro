@@ -1,4 +1,5 @@
 ---
+import { withBase } from "../utils/base";
 import MainLayout from "../layouts/MainLayout.astro";
 import colors from "../colors";
 const primaryOutlineLight = colors["primary_outline_light"];
@@ -40,21 +41,21 @@ const primaryOutlineDark = colors["primary_outline_dark"];
         <h1>Terms of use</h1>
 
         <p>
-            This project, the <a href="/resources.html">tools</a> and the <a
-                href="./atlas">Atlas of comfort</a
+            This project, the <a href={withBase("/resources")}>tools</a> and the <a
+                href={withBase("/atlas")}>Atlas of comfort</a
             > are constantly under development and improving. The main purpose of this website is
             only to allow sharing our ideas and visions.
         </p>
 
         <p>
             If you want to reference our work, please do so through the related
-            academic publications. <a href="./contact.html">Contact us</a> to see
+            academic publications. <a href={withBase("/contact")}>Contact us</a> to see
             what we have done.
         </p>
 
         <p>
             If you have any question about the use of our content, please
-            <a href="./contact.html">contact us</a>. We are happy to answer!
+            <a href={withBase("/contact")}>contact us</a>. We are happy to answer!
         </p>
 
         <p>Other than that, plase enjoy!</p>

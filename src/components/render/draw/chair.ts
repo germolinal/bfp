@@ -1,7 +1,8 @@
+import { withBase } from "../../../utils/base";
 import * as THREE from "three"
 import type { ChairOptions } from "../simple_types/object_specs"
 
-const chairTexture = new THREE.TextureLoader().load('/renderer/chairFabricTexture.jpg')
+const chairTexture = new THREE.TextureLoader().load(withBase('/renderer/chairFabricTexture.jpg'))
 chairTexture.wrapS= chairTexture.wrapT=THREE.RepeatWrapping
 chairTexture.repeat.set(0.5,0.5)
 

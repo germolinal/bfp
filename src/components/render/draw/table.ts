@@ -1,7 +1,8 @@
+import { withBase } from "../../../utils/base";
 import * as THREE from "three"
 import type { TableOptions } from "../simple_types/object_specs"
 
-const tableTexture = new THREE.TextureLoader().load('/renderer/woodStorageTexture.jpg')
+const tableTexture = new THREE.TextureLoader().load(withBase('/renderer/woodStorageTexture.jpg'))
 tableTexture.wrapS=tableTexture.wrapT=THREE.RepeatWrapping
 tableTexture.repeat.set(0.3,0.3)
 

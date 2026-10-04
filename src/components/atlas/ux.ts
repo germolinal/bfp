@@ -1,5 +1,6 @@
 
 "use strict"
+import { withBase } from "../../utils/base";
 import type Diagram from "./diagram"
 import Router from "./router"
 
@@ -128,7 +129,7 @@ export function selectLayer(router: Router, layerID: string, domainID: string, d
 
     var content = document.getElementById("content_text_aid")!
 
-    fetch("/api/schema/describe_layer/" + layerID, {
+    fetch(withBase("/api/schema/describe_layer/") + layerID, {
         method: "GET"
     }).then(async (r) => {
         if (!r.ok) {
@@ -298,7 +299,7 @@ export function selectCode(router: Router, codeID: string, domainID: string, dia
     mainContent.appendChild(contentTable);
 
     // Source the description
-    fetch("/api/schema/describe_code/" + codeID, {
+    fetch(withBase("/api/schema/describe_code/") + codeID, {
         method: "GET"
     }).then(async (r) => {
         if (!r.ok) {
@@ -320,7 +321,7 @@ export function selectCode(router: Router, codeID: string, domainID: string, dia
 
 
     // Get quotes from server.    
-    fetch("/api/quotes/code/" + codeID, {
+    fetch(withBase("/api/quotes/code/") + codeID, {
         method: "GET"
     }).then(async (r) => {
         if (!r.ok) {

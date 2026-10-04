@@ -1,4 +1,5 @@
 ---
+import { withBase } from "../utils/base";
 import MainLayout from "../layouts/MainLayout.astro";
 import colors from "../colors";
 
@@ -6,6 +7,7 @@ const primaryOutlineLight = colors["primary_outline_light"];
 const primarySolidLight = colors["primary_solid_light"];
 const onPrimarySolidLight = colors["on_primary_solid_light"];
 const primaryOutlineDark = colors["primary_outline_dark"]
+const cofee = `url("${withBase("/cofee.jpg")}")`;
 ---
 
 <MainLayout
@@ -14,6 +16,7 @@ const primaryOutlineDark = colors["primary_outline_dark"]
 >
 	<style
 		define:vars={{
+			cofee,
 			primaryOutlineLight,
 			primarySolidLight,
 			onPrimarySolidLight,
@@ -37,7 +40,7 @@ const primaryOutlineDark = colors["primary_outline_dark"]
 			padding: 0 0;
 			margin: 0;
 
-			background-image: url("/cofee.jpg");
+			background-image: var(--cofee);
 			background-position: center;
 			background-repeat: no-repeat;
 			background-size: cover;
@@ -138,12 +141,12 @@ const primaryOutlineDark = colors["primary_outline_dark"]
 			<h2>Let's take them seriously</h2>
 		</div>
 		<div id="actions">
-			<a href="/atlas">
+			<a href={withBase("/atlas")}>
 				<small> Check our </small>
 				<p>Atlas of Comfort</p>
 			</a>
 
-			<a href="/simple">
+			<a href={withBase("/simple")}>
 				<small> Check our </small>
 				<p><code>SIMPLE</code> simulation tool</p>
 			</a>

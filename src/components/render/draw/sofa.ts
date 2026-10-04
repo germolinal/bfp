@@ -1,12 +1,13 @@
+import { withBase } from "../../../utils/base";
 import * as THREE from "three"
 import type { SofaOptions } from "../simple_types/object_specs"
 import { divideIntoInt } from "./utils";
 
-const chairTexture = new THREE.TextureLoader().load('/renderer/chairTexture.jpg')
+const chairTexture = new THREE.TextureLoader().load(withBase('/renderer/chairTexture.jpg'))
 chairTexture.wrapS= chairTexture.wrapT=THREE.RepeatWrapping
 chairTexture.repeat.set(0.5,0.5)
 
-const sofaTexture = new THREE.TextureLoader().load('/renderer/sofaTexture.jpg')
+const sofaTexture = new THREE.TextureLoader().load(withBase('/renderer/sofaTexture.jpg'))
 sofaTexture.wrapS=sofaTexture.wrapT=THREE.RepeatWrapping
 sofaTexture.repeat.set(0.5,0.5)
 

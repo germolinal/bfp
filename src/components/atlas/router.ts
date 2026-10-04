@@ -1,3 +1,4 @@
+import { stripBase } from "../../utils/base";
 import Diagram from "./diagram";
 import type { ValidDomain } from "./types";
 import { selectLayer, selectCode } from "./ux";
@@ -25,7 +26,7 @@ export default class Router {
         var fragment = "";
 
         if (this.mode === 'history') {
-            fragment = this.clearSlashes(decodeURI(window.location.pathname + window.location.search));
+            fragment = this.clearSlashes(decodeURI(stripBase(window.location.pathname) + window.location.search));
             
             fragment = fragment.replace("atlas.html", "").replace("atlas", "");
         } else {

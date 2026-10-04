@@ -1,4 +1,5 @@
 ---
+import { withBase } from "../utils/base";
 
 
 const background = "white";
@@ -7,10 +8,14 @@ const text = "inherit";
 const textDark = "inherit";
 const onBackground = "black";
 const onBackgroundDark = "white";
+const logoBlack = `url("${withBase("/logo_black.svg")}")`;
+const logoWhite = `url("${withBase("/logo_white.svg")}")`;
 ---
 
 <style
     define:vars={{
+        logoBlack,
+        logoWhite,
         text,
         textDark,
         background,
@@ -62,7 +67,7 @@ const onBackgroundDark = "white";
         width: 24px;
         background-size: cover;
         background-repeat: no-repeat;
-        background-image: url("/logo_black.svg");
+        background-image: var(--logoBlack);
     }
     a {
         text-decoration: none;
@@ -113,7 +118,7 @@ const onBackgroundDark = "white";
 
     @media (prefers-color-scheme: dark) {
         #logo {
-            background-image: url("/logo_white.svg");
+            background-image: var(--logoWhite);
         }
         nav#header,
         div#navbar-buttons {
@@ -142,12 +147,12 @@ const onBackgroundDark = "white";
     
     <div id="navbar-buttons">        
         <span>
-            <a href="/">Home</a>
-            <a href="/resources">Resources</a>
-            <a href="/blog">Blog</a>
-            <a href="/about">About</a>
-            <a href="/terms_of_use">Terms of use</a>
-            <a href="/contact">Contact</a>
+            <a href={withBase("/")}>Home</a>
+            <a href={withBase("/resources")}>Resources</a>
+            <a href={withBase("/blog")}>Blog</a>
+            <a href={withBase("/about")}>About</a>
+            <a href={withBase("/terms_of_use")}>Terms of use</a>
+            <a href={withBase("/contact")}>Contact</a>
         </span>
         <span id="navbar-close-menu-icon">
             <svg

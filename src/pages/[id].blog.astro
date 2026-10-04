@@ -1,4 +1,5 @@
 ---
+import { withBase } from "../utils/base";
 import MainLayout from "../layouts/MainLayout.astro";
 // import BlogPostLayout from "../layouts/BlogPostLayout.astro";
 import { getEntry } from "astro:content";
@@ -84,7 +85,7 @@ const frontmatter = blogPost.data
     </style>
     <div
         class="main-img"
-        style={`background-image: url(/${frontmatter.image});`}
+        style={`background-image: url(${withBase(frontmatter.image)});`}
     >
     </div>
     <article>
